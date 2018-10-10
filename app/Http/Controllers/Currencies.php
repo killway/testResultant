@@ -25,3 +25,4 @@ class Currencies extends Controller
         return response()->json(['message' => "can't get data from phisix"], 200);
     }
 }
+
