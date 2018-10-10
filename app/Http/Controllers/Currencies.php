@@ -16,13 +16,16 @@ class Currencies extends Controller
 
             foreach ($currencies as &$currency) {
                 $currency['volume'] = intval($currency['volume']);
-                $currency['amount'] = number_format(floatval($currency['price']['amount']), 2);
+                $currency['amount'] = null;
+                if ($currency['price'] && $currency['price']['amount']) {
+                    $currency['amount'] = number_format(floatval($currency['price']['amount']), 2);
+                }
             }
 
             return response()->json($currencies, 200);
         }
 
-        return response()->json(['message' => "can't get data from phisix"], 200);
+        return response()->json(['message' => "can't get data from phisix"], 404);
     }
 }
 
